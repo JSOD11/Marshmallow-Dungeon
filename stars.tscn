@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspik7p7wt1vb"]
+
+[ext_resource type="Texture2D" uid="uid://dgv2krfvmq64s" path="res://stars.png" id="1_scq43"]
+
+[node name="Stars" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxLayer"]
+offset_left = -1043.0
+offset_top = -905.0
+offset_right = 12463.0
+offset_bottom = 11642.0
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("1_scq43")
+stretch_mode = 1

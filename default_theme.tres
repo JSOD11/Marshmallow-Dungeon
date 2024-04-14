@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cm115d55yul4e"]
+
+[ext_resource type="Texture2D" uid="uid://btauahxa3o6oq" path="res://white_9slice.png" id="1_8r01v"]
+[ext_resource type="Texture2D" uid="uid://c2ok08q2wv0i1" path="res://black_9slice.png" id="1_70unk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpce5"]
+texture = ExtResource("1_8r01v")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m6ds8"]
+texture = ExtResource("1_70unk")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8cgpo"]
+texture = ExtResource("1_70unk")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+Button/colors/font_hover_color = Color(0.835294, 0.835294, 0.835294, 1)
+Button/colors/font_pressed_color = Color(0.168627, 0.168627, 0.168627, 1)
+Button/font_sizes/font_size = 6
+Button/styles/focus = SubResource("StyleBoxTexture_bpce5")
+Button/styles/hover = SubResource("StyleBoxTexture_m6ds8")
+Button/styles/normal = SubResource("StyleBoxTexture_8cgpo")

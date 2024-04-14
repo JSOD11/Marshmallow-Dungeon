@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0he0wsnmdqag"]
+
+[ext_resource type="Script" path="res://start_menu.gd" id="1_w4mwm"]
+[ext_resource type="PackedScene" uid="uid://cspik7p7wt1vb" path="res://stars.tscn" id="2_3x6o3"]
+[ext_resource type="AudioStream" uid="uid://byt7sdcr01kss" path="res://title_music.ogg" id="2_ulgdo"]
+[ext_resource type="AudioStream" uid="uid://c1i7eyslkyvye" path="res://teapot.wav" id="3_ts5v5"]
+[ext_resource type="AudioStream" uid="uid://e7anjtw2y3eb" path="res://table_hit.wav" id="4_bhw3c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3iob"]
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_vui3a"]
+font_size = 4
+
+[node name="StartMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w4mwm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Marshmallow 
+Dungeon"
+label_settings = SubResource("LabelSettings_p3iob")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2)
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+text = "Start Game"
+
+[node name="AchievementsButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+text = "Achievements"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+text = "Quit"
+
+[node name="JSOD" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "
+headphones recommended
+© JSOD 2024"
+label_settings = SubResource("LabelSettings_vui3a")
+horizontal_alignment = 1
+
+[node name="TitleMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ulgdo")
+
+[node name="ButtonSwitchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ts5v5")
+
+[node name="ButtonPressedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bhw3c")
+
+[node name="Stars" parent="." instance=ExtResource("2_3x6o3")]
+
+[connection signal="focus_entered" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/AchievementsButton" to="." method="_on_achievements_button_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

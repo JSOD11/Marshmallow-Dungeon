@@ -1,0 +1,159 @@
+[gd_scene load_steps=18 format=3 uid="uid://dv47cuyxmlgn5"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_sqk83"]
+[ext_resource type="Texture2D" uid="uid://caawajnwlwhvc" path="res://marshmallow.png" id="2_1iw2j"]
+[ext_resource type="AudioStream" uid="uid://ceqhpao7p335c" path="res://jump.wav" id="3_ckein"]
+[ext_resource type="AudioStream" uid="uid://ccbk7b1kkcv6c" path="res://coin.wav" id="4_22wje"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfewx"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(120, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4b2j"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1vwp"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(48, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gbd1"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(24, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdmrg"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(48, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dub55"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(72, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2sys"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(96, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0vd8"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(120, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpqve"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(144, 0, 24, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi2ll"]
+atlas = ExtResource("2_1iw2j")
+region = Rect2(0, 0, 24, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kw38m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfewx")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4b2j")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1vwp")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gbd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdmrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dub55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2sys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0vd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpqve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi2ll")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2gxq"]
+size = Vector2(8, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ailgo"]
+size = Vector2(6, 14)
+
+[node name="Player" type="CharacterBody2D"]
+visibility_layer = 7
+collision_layer = 2
+floor_constant_speed = true
+floor_snap_length = 3.0
+script = ExtResource("1_sqk83")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_kw38m")
+animation = &"Fall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_o2gxq")
+
+[node name="HazardDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardDetector"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ailgo")
+
+[node name="HeartDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeartDetector"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ailgo")
+
+[node name="CoinDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinDetector"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ailgo")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ckein")
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_22wje")
+
+[connection signal="area_entered" from="HazardDetector" to="." method="_on_hazard_detector_area_entered"]
+[connection signal="area_entered" from="HeartDetector" to="." method="_on_heart_detector_area_entered"]
+[connection signal="area_entered" from="CoinDetector" to="." method="_on_coin_detector_area_entered"]

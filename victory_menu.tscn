@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck8801lya6u8k"]
+
+[ext_resource type="Script" path="res://victory_menu.gd" id="1_3y3fo"]
+[ext_resource type="PackedScene" uid="uid://cspik7p7wt1vb" path="res://stars.tscn" id="2_m6q4u"]
+
+[node name="VictoryMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3y3fo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VictoryAchieved" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dungeon Conquered"
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 24)
+layout_mode = 2
+text = "Return to main menu"
+
+[node name="Stars" parent="." instance=ExtResource("2_m6q4u")]
+
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

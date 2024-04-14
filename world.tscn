@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://dse068dlo1vyc"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_vapph"]
+[ext_resource type="PackedScene" uid="uid://dv47cuyxmlgn5" path="res://player.tscn" id="2_agrq7"]
+[ext_resource type="PackedScene" uid="uid://cspik7p7wt1vb" path="res://stars.tscn" id="2_sjjd4"]
+[ext_resource type="Texture2D" uid="uid://dm77njh15nsm1" path="res://heart.png" id="3_tv76s"]
+[ext_resource type="PackedScene" uid="uid://bn8vg5j1qoy1h" path="res://level_complete.tscn" id="5_evymi"]
+[ext_resource type="Texture2D" uid="uid://e8i6kqxoklda" path="res://coin.png" id="6_djcm0"]
+[ext_resource type="Texture2D" uid="uid://dxvjtxiycnhgx" path="res://vignette.png" id="6_s62fm"]
+[ext_resource type="PackedScene" uid="uid://d328wn4ro5jbv" path="res://end_door.tscn" id="7_7181f"]
+[ext_resource type="PackedScene" uid="uid://myb2kp83rfcx" path="res://level_tile_map.tscn" id="9_hi5ff"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_vapph")
+
+[node name="EndDoor" parent="." instance=ExtResource("7_7181f")]
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("2_agrq7")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -16)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="LevelTileMap" parent="." instance=ExtResource("9_hi5ff")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Vignette" type="TextureRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -839.0
+offset_top = -921.0
+offset_right = -159.0
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("6_s62fm")
+stretch_mode = 3
+
+[node name="Heart" type="TextureRect" parent="HUD"]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+texture = ExtResource("3_tv76s")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Coin" type="TextureRect" parent="HUD"]
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 40.0
+texture = ExtResource("6_djcm0")
+
+[node name="NumCoins" type="RichTextLabel" parent="HUD"]
+offset_left = 27.0
+offset_top = 25.0
+offset_right = 86.0
+offset_bottom = 42.0
+text = "0"
+fit_content = true
+
+[node name="LevelComplete" parent="HUD" instance=ExtResource("5_evymi")]
+unique_name_in_owner = true
+visible = false
+light_mask = 4
+visibility_layer = 4
+
+[node name="GameTimeLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_top = 10.0
+offset_bottom = 27.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="Stars" parent="." instance=ExtResource("2_sjjd4")]
